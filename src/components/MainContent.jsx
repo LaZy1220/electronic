@@ -1,8 +1,9 @@
 import styled, { css } from "styled-components";
 import { Title } from "./Title";
+import BgImg from "../images/mainBg.jpg";
 
 const BackGround = styled.div`
-  background: url("https://thumb.tildacdn.com/tild3238-6135-4537-b333-393734653961/-/format/webp/sebastian-pociecha-L.jpg");
+  background: url(${BgImg});
   background-repeat: no-repeat;
   background-position: center center;
   -webkit-background-size: cover;
@@ -22,6 +23,20 @@ const Body = styled.div`
   padding: 140px 0 0 15%;
   height: 100vh;
   width: 700px;
+  @media screen and (max-width: 675px) {
+    padding-top: 170px;
+    width: 100%;
+  }
+  @media screen and (max-width: 480px) {
+    padding-left: 30px;
+  }
+  @media screen and (max-height: 480px) {
+    padding-top: 60px;
+    width: 100%;
+  }
+  @media screen and (max-height: 410px) {
+    height: 500px;
+  }
 `;
 const Text = styled.p`
   position: relative;
@@ -32,9 +47,13 @@ const Text = styled.p`
   ${(props) =>
     props.number &&
     css`
-      padding-top: 16px;
+      padding-top: 16px !important;
       font-size: 24px;
     `}
+  @media screen and (max-width: 1120px) {
+    padding-top: 30px;
+    font-size: 18px;
+  }
 `;
 const Button = styled.button`
   background-color: var(--yellow);
