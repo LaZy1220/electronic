@@ -3,21 +3,18 @@ import { Title } from "./Title";
 import BgImg from "../images/mainBg.jpg";
 
 const BackGround = styled.div`
-  background: url(${BgImg});
+   background-image: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url(${BgImg});
+}
   background-repeat: no-repeat;
   background-position: center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
   background-size: cover;
   color: white;
   letter-spacing: 0;
-  width: 100%;
-  height: 100%;
-`;
-const Conteiner = styled.div`
-  background-color: black;
-  opacity: 0.72;
 `;
 const Body = styled.div`
   padding: 140px 0 0 15%;
@@ -73,15 +70,13 @@ const Button = styled.button`
 export const MainContent = () => {
   return (
     <BackGround>
-      <Conteiner>
-        <Body>
-          <Title>Электромонтажные работы</Title>
-          <Text>По Минску и Минскому району</Text>
-          <Text>Контакты</Text>
-          <Text number>+375 (29) 114-02-88</Text>
-          <Button>Заказать услугу</Button>
-        </Body>
-      </Conteiner>
+      <Body>
+        <Title>Электромонтажные работы</Title>
+        <Text>По Минску и Минскому району</Text>
+        <Text>Контакты</Text>
+        <Text number>+375 (29) 114-02-88</Text>
+        <Button>Заказать услугу</Button>
+      </Body>
     </BackGround>
   );
 };

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getInfoPage } from "./components/features/allInfo-slice";
 import { MainContent } from "./components/MainContent";
+import { Navigate } from "./components/Navigate";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function App() {
       ) : (
         <>
           <MainContent />
+          <Navigate />
         </>
       )}
     </>
