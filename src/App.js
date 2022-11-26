@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Burger } from "./components/navigation/Burger";
 import { getInfoPage } from "./components/features/allInfo-slice";
 import { MainContent } from "./components/MainContent";
-import { Navigate } from "./components/Navigate";
+import { Navigate } from "./components/navigation/Navigate";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function App() {
         <div>loading....</div>
       ) : (
         <>
+          <Burger />
           <MainContent />
           <Navigate />
         </>

@@ -25,7 +25,7 @@ const allInfoSlice = createSlice({
       })
       .addCase(getInfoPage.fulfilled, (state, action) => {
         state.status = "received";
-        state.list = action.payload.data.AllValues;
+        state.list = action.payload.data;
       });
   },
 });

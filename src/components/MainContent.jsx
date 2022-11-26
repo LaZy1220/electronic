@@ -3,13 +3,8 @@ import { Title } from "./Title";
 import BgImg from "../images/mainBg.jpg";
 
 const BackGround = styled.div`
-   background-image: 
-    linear-gradient(
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.5)
-    ),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url(${BgImg});
-}
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

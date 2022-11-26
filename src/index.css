@@ -15,3 +15,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.is-active {
+  background: green !important;
+}
+.is-active span {
+  background: none;
+}
+.is-active span::before {
+  top: 0;
+  transform: rotate(-45deg);
+}
+.is-active span::after {
+  bottom: 0;
+  transform: rotate(45deg);
+}
+.is-active span::before,
+.is-active span::after {
+  transition-delay: 0s, 0.3s;
+}
