@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import { Title } from "./Title";
 import BgImg from "../images/mainBg.jpg";
 
 const BackGround = styled.div`
@@ -10,6 +9,16 @@ const BackGround = styled.div`
   background-size: cover;
   color: white;
   letter-spacing: 0;
+`;
+const Title = styled.h1`
+  font-size: 60px;
+  text-transform: uppercase;
+  @media screen and (max-width: 1120px) {
+    font-size: 45px;
+  }
+  @media screen and (max-width: 675px) {
+    font-size: 24px;
+  }
 `;
 const Body = styled.div`
   padding: 140px 0 0 15%;
