@@ -1,8 +1,5 @@
 import styled from "styled-components";
 import { Burger } from "./Burger";
-import { LeftNavigate } from "./LeftNavigate";
-import { useDispatch, useSelector } from "react-redux";
-import { setActive } from "../features/menu-slice";
 
 const NavigateEl = styled.nav`
   position: fixed;
@@ -37,8 +34,6 @@ const NavigateEl = styled.nav`
 `;
 
 export const Navigate = () => {
-  const dispatch = useDispatch();
-  const isActive = useSelector((state) => state.active);
   return (
     <>
       <NavigateEl>
@@ -64,7 +59,6 @@ export const Navigate = () => {
         </ul>
       </NavigateEl>
       <Burger />
-      <LeftNavigate />
     </>
   );
 };

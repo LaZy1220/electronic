@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Ul = styled.ul`
   width: 250px;
-  margin-left: -250px;
+  margin-left: ${({ isActive }) => (isActive ? "0" : "-250px")};
   background: black;
   position: fixed;
   left: 0;
@@ -17,9 +17,9 @@ const Ul = styled.ul`
     font-size: 20px;
   }
 `;
-export const LeftNavigate = () => {
+export const LeftNavigate = ({ isActive }) => {
   return (
-    <Ul>
+    <Ul isActive={isActive}>
       <li>Услуги</li>
       <li>Этапы работы</li>
       <li>Приемущества</li>
