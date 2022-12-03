@@ -78,7 +78,7 @@ const CardText = styled.div`
 
 export const OurServices = () => {
   return (
-    <OurServicesEl>
+    <OurServicesEl id="our-services">
       <Title>Наши услуги</Title>
       <Text>Все наши услуги распростроняются по Минску и Минскому району</Text>
       <Flex>

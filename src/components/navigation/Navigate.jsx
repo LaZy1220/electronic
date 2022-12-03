@@ -42,19 +42,19 @@ export const Navigate = () => {
             <a href="#our-services">Услуги</a>
           </li>
           <li>
-            <a href="/">Этапы работы</a>
+            <a href="#stages-work">Этапы работы</a>
           </li>
           <li>
-            <a href="/">Приемущества</a>
+            <a href="#advantages">Приемущества</a>
           </li>
           <li>
-            <a href="/">Прайс</a>
+            <a href="#price">Прайс</a>
           </li>
           <li>
-            <a href="/">Отзывы</a>
+            <a href="#reviews">Отзывы</a>
           </li>
           <li>
-            <a href="/">Заказать</a>
+            <a href="#order">Заказать</a>
           </li>
         </ul>
       </NavigateEl>

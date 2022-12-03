@@ -28,7 +28,7 @@ const Grid = styled.div`
 export const StagesWork = () => {
   const stageWork = useSelector((state) => state.allInfo.list.stage_work);
   return (
-    <StageWorkEl>
+    <StageWorkEl id="stages-work">
       <Title>Этапы работы</Title>
       <Grid>
         {stageWork?.map((stage) => (
