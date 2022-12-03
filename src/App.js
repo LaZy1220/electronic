@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getInfoPage } from "./components/features/allInfo-slice";
 import { MainContent } from "./components/MainContent";
-import { Navigate } from "./components/navigation/Navigate";
+import { Navigate } from "./components/Navigation/Navigate";
 import { Content } from "./components/Content";
 function App() {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ function App() {
     <>
       <MainContent />
       <Navigate />
-      {status === "loading" ? <div>loading....</div> : <Content />}
+      <Content />
     </>
   );
 }

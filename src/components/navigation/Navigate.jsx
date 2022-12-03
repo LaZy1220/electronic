@@ -39,7 +39,7 @@ export const Navigate = () => {
       <NavigateEl>
         <ul>
           <li>
-            <a href="/">Услуги</a>
+            <a href="#our-services">Услуги</a>
           </li>
           <li>
             <a href="/">Этапы работы</a>

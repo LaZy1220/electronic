@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ContentBg from "../images/contentBg.jpg";
 import { OurServices } from "./OurServices";
-import { StagesWork } from "./StagesWork";
+import { StagesWork } from "./StagesWork/StagesWork";
 
 const ContentEl = styled.div`
   background-image: url(${ContentBg});
