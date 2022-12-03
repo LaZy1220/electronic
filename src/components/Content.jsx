@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import ContentBg from "../images/contentBg.jpg";
 import { OurServices } from "./OurServices";
+import { StagesWork } from "./StagesWork";
 
 const ContentEl = styled.div`
   background-image: url(${ContentBg});
@@ -14,6 +15,7 @@ export const Content = () => {
     <>
       <ContentEl>
         <OurServices />
+        <StagesWork />
       </ContentEl>
     </>
   );

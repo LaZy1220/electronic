@@ -6,6 +6,7 @@ const Text = styled.h4`
   margin-bottom: 80px;
   @media screen and (max-width: 1120px) {
     font-size: 40px;
+    margin-bottom: 40px;
   }
 `;
 

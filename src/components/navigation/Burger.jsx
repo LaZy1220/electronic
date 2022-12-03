@@ -4,6 +4,7 @@ import { setActive } from "../features/menu-slice";
 import { LeftNavigate } from "./LeftNavigate";
 
 const BurgerEl = styled.div`
+  z-index: 1000;
   display: none;
   width: 56px;
   height: 56px;
