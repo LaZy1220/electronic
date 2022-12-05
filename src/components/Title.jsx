@@ -13,6 +13,9 @@ const Text = styled.h4`
     font-size: 40px;
     margin-bottom: 40px;
   }
+  @media screen and (max-height: 480px) {
+    margin-bottom: 30px;
+  }
 `;
 
 export const Title = ({ color, children }) => {

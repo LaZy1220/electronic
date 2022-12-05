@@ -7,6 +7,7 @@ import { useState } from "react";
 const ServicesEl = styled.div`
   margin: auto 180px;
   margin-top: 110px;
+  padding-bottom: 20px;
   @media screen and (max-width: 1120px) {
     margin-left: 5%;
     margin-right: 5%;
