@@ -13,6 +13,9 @@ const Ul = styled.ul`
   padding: 20px;
   li {
     list-style: none;
+  }
+  a {
+    text-decoration: none;
     color: white;
     font-size: 20px;
   }
@@ -20,12 +23,24 @@ const Ul = styled.ul`
 export const LeftNavigate = ({ isActive }) => {
   return (
     <Ul isActive={isActive}>
-      <li>Услуги</li>
-      <li>Этапы работы</li>
-      <li>Приемущества</li>
-      <li>Прайс</li>
-      <li>Отзывы</li>
-      <li>Заказать</li>
+      <li>
+        <a href="#our-services">Услуги</a>
+      </li>
+      <li>
+        <a href="#stages-work">Этапы работы</a>
+      </li>
+      <li>
+        <a href="#advantages">Приемущества</a>
+      </li>
+      <li>
+        <a href="#price">Прайс</a>
+      </li>
+      <li>
+        <a href="#reviews">Отзывы</a>
+      </li>
+      <li>
+        <a href="#order">Заказать</a>
+      </li>
     </Ul>
   );
 };

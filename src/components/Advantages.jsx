@@ -18,6 +18,16 @@ const Flex = styled.div`
   justify-content: space-between;
   color: white;
   padding-bottom: 120px;
+  @media screen and (max-width: 1120px) {
+    margin: 0;
+  }
+  @media screen and (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    padding-bottom: 50px;
+  }
 `;
 const Advantage = styled.div`
   text-align: center;
@@ -25,7 +35,7 @@ const Advantage = styled.div`
 `;
 export const Advantages = () => {
   return (
-    <AdvantagesEl>
+    <AdvantagesEl id="advantages">
       <Title color={"white"}>Приемущества</Title>
       <Flex>
         <Advantage>

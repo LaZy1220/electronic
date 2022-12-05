@@ -2,6 +2,7 @@ import styled from "styled-components";
 import ContentBg from "../images/contentBg.jpg";
 import { Advantages } from "./Advantages";
 import { OurServices } from "./OurServices";
+import { Services } from "./Services/Services";
 import { StagesWork } from "./StagesWork/StagesWork";
 
 const ContentEl = styled.div`
@@ -18,6 +19,7 @@ export const Content = () => {
         <OurServices />
         <StagesWork />
         <Advantages />
+        <Services />
       </ContentEl>
     </>
   );
