@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -14,6 +14,7 @@ const Input = styled.input`
     font-size: 18px;
   }
 `;
+
 const SubButton = styled.button`
   width: 40%;
   height: 60px;
@@ -34,6 +35,7 @@ const SubButton = styled.button`
     font-size: 18px;
   }
 `;
+
 const OrderFormEl = styled.div`
   display: flex;
   flex-direction: column;
@@ -51,19 +53,28 @@ export const OrderForm = () => {
   const [numberError, setNumberError] = useState(
     "Телефон не может быть пустой"
   );
-  const [formValid, setFormValid] = useState(false);
-  useEffect(() => {
-    if (emailError || numberError || nameError) {
-      setFormValid(false);
+  const addOrder = async () => {
+    if (emailError) {
+      alert("Некорректная почта");
+    } else if (numberError) {
+      alert("Некорректный номер");
+    } else if (nameError) {
+      alert("Некорректное имя");
     } else {
-      setFormValid(true);
+      return await axios.post("http://electrical.makser-test.site/api/forms/", {
+        email: email,
+        username: name,
+        number: number,
+      });
     }
-  }, [emailError, numberError, nameError]);
-
+  };
   const nameHandler = (e) => {
     setName(e.target.value);
-    if (e.target.value.trim().length < 3) {
+    if (e.target.value.trim().length < 2) {
       setNameError("Имя слишком короткое");
+    }
+    if (e.target.value.trim().length > 40) {
+      setNameError("Имя слишком длинное");
     } else {
       setNameError("");
     }
@@ -81,7 +92,7 @@ export const OrderForm = () => {
   const numberHandler = (e) => {
     setNumber(e.target.value);
     const re = /^\s*\+?375((33\d{7})|(29\d{7})|(44\d{7}|)|(25\d{7}))\s*$/;
-    if (re) {
+    if (!re.test(String(e.target.value))) {
       setNumberError("Некорректный телефон");
     } else {
       setNumberError("");
@@ -110,16 +121,9 @@ export const OrderForm = () => {
           type="text"
           value={name}
           onChange={(e) => nameHandler(e)}
-          placeholder="Ваше ФИО"
+          placeholder="Ваше имя"
         />
-        <SubButton
-          formValid={formValid}
-          name={name}
-          email={email}
-          number={number}
-        >
-          Отправить
-        </SubButton>
+        <SubButton onClick={() => addOrder()}>Отправить</SubButton>
       </OrderFormEl>
     </>
   );
