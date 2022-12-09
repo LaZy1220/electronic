@@ -18,7 +18,7 @@ const OrderEl = styled.div`
       padding-top: 50px;
     }
     @media screen and (max-width: 480px) {
-      padding-top: 70px;
+      padding-top: 20px;
     }
     @media screen and (max-height: 580px) {
       padding-top: 20px;
@@ -30,7 +30,7 @@ const OrderEl = styled.div`
   p {
     font-size: 16px;
   }
-  @media screen and (max-height: 410px) {
+  @media screen and (max-height: 510px) {
     height: 500px;
   }
   @media all and(display-mode: fullscreen) {

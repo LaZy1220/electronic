@@ -53,6 +53,13 @@ export const OrderForm = () => {
   const [numberError, setNumberError] = useState(
     "Телефон не может быть пустой"
   );
+  const fetchFunc = async () => {
+    return await axios.post("http://electrical.makser-test.site/api/forms/", {
+      email: email,
+      username: name,
+      number: number,
+    });
+  };
   const addOrder = async () => {
     if (emailError) {
       alert("Некорректная почта");
@@ -61,11 +68,10 @@ export const OrderForm = () => {
     } else if (nameError) {
       alert("Некорректное имя");
     } else {
-      return await axios.post("http://electrical.makser-test.site/api/forms/", {
-        email: email,
-        username: name,
-        number: number,
-      });
+      fetchFunc();
+      setEmail("");
+      setNumber("");
+      setName("");
     }
   };
   const nameHandler = (e) => {
