@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import ContentBg from "../images/contentBg.jpg";
 import { Advantages } from "./Advantages";
+import { FeedBack } from "./FeedBack";
 import { OurServices } from "./OurServices";
 import { Services } from "./Services/Services";
 import { StagesWork } from "./StagesWork/StagesWork";
@@ -20,6 +21,7 @@ export const Content = () => {
         <StagesWork />
         <Advantages />
         <Services />
+        <FeedBack />
       </ContentEl>
     </>
   );
