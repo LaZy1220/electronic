@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { setActiveOrder } from "./features/isShowOrder-slice";
 
 const Input = styled.input`
   width: 40%;
@@ -45,6 +47,8 @@ const OrderFormEl = styled.div`
 `;
 
 export const OrderForm = () => {
+  const isShowOrder = useSelector((state) => state.isShow);
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
@@ -72,6 +76,7 @@ export const OrderForm = () => {
       setEmail("");
       setNumber("");
       setName("");
+      dispatch(setActiveOrder(!isShowOrder));
     }
   };
   const nameHandler = (e) => {

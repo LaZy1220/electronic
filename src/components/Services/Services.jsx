@@ -18,7 +18,6 @@ const SubTitle = styled.h4`
   font-size: 40px;
   font-weight: 400;
   margin-bottom: 80px;
-  padding-top: 50px;
   @media screen and (max-width: 1120px) {
     font-size: 30px;
     margin-top: 0;
