@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const isShowSlice = createSlice({
   name: "@@isOrder",
-  initialState: true,
+  initialState: false,
   reducers: {
     setActiveOrder: (_, actions) => actions.payload,
   },
