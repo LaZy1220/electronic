@@ -1,5 +1,7 @@
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Cross from "../images/cross.svg";
+import { setActiveAddOrder } from "./features/isShowAddOrder-slice";
 import { OrderForm } from "./OrderForm";
 
 const AddOrderEl = styled.div`
@@ -33,15 +35,30 @@ const Title = styled.h3`
   padding-top: 15px;
   font-size: 50px;
   padding-bottom: 80px;
+  @media screen and (max-width: 1000px) {
+    padding-bottom: 40px;
+    font-size: 40px;
+  }
+  @media screen and (max-width: 675px) {
+    padding-bottom: 30px;
+    font-size: 30px;
+  }
 `;
 
 export const AddOrder = () => {
+  const addOrderForm = true;
+  const isAddOrderShow = useSelector((state) => state.isAddShow);
+  const dispatch = useDispatch();
   return (
     <Wrapper>
       <AddOrderEl>
-        <img src={Cross} alt="X" />
+        <img
+          onClick={() => dispatch(setActiveAddOrder(!isAddOrderShow))}
+          src={Cross}
+          alt="X"
+        />
         <Title>Заказать услугу</Title>
-        <OrderForm addOrderForm />
+        <OrderForm addOrderForm={addOrderForm} />
       </AddOrderEl>
     </Wrapper>
   );

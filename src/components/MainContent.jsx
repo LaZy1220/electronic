@@ -1,5 +1,7 @@
+import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import BgImg from "../images/mainBg.jpg";
+import { setActiveAddOrder } from "./features/isShowAddOrder-slice";
 
 const BackGround = styled.div`
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -72,6 +74,8 @@ const Button = styled.button`
 `;
 
 export const MainContent = () => {
+  const isAddOrderShow = useSelector((state) => state.isAddShow);
+  const dispatch = useDispatch();
   return (
     <BackGround>
       <Body>
@@ -79,7 +83,9 @@ export const MainContent = () => {
         <Text>По Минску и Минскому району</Text>
         <Text>Контакты</Text>
         <Text number>+375 (29) 114-02-88</Text>
-        <Button>Заказать услугу</Button>
+        <Button onClick={() => dispatch(setActiveAddOrder(!isAddOrderShow))}>
+          Заказать услугу
+        </Button>
       </Body>
     </BackGround>
   );

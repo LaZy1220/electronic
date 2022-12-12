@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 
 const CaruselEl = styled.div``;
@@ -11,22 +10,19 @@ const Window = styled.div`
 const Conteiner = styled.div`
   height: 100%;
   display: flex;
+  transition: translate;
+  transition-property: transform;
+  transition-duration: 500ms;
+  transition-timing-function: ease-in-out;
 `;
 
-export const Carusel = ({ children }) => {
-  const checkSize = () => {
-    if (window.screen.width < 1120 && window.screen.width > 730) {
-      return 700;
-    } else if (window.screen.width < 730) {
-      return 300;
-    } else return 900;
-  };
+export const Carusel = ({ children, offset }) => {
   return (
     <CaruselEl>
       <Window>
         <Conteiner
           style={{
-            transform: `translateX(${checkSize}px)`,
+            transform: `translateX(${offset}px)`,
           }}
         >
           {children}

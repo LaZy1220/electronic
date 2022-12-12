@@ -1,16 +1,17 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { setActiveAddOrder } from "./features/isShowAddOrder-slice";
 import { setActiveOrder } from "./features/isShowOrder-slice";
 
 const Input = styled.input`
-  width: 40%;
+  width: ${(props) => (props.addOrderForm ? "100%" : "40%")};
   height: 60px;
   padding-left: 40px;
   font-size: 20px;
-  @media screen and (max-width: 675px) {
-    width: 60%;
+  @media screen and (max-width: 700px) {
+    width: ${(props) => (props.addOrderForm ? "80%" : "60%")};
     height: 50px;
     padding-left: 20px;
     font-size: 18px;
@@ -30,7 +31,7 @@ const SubButton = styled.button`
     background-color: white;
     border: 3px solid var(--yellow);
   }
-  @media screen and (max-width: 675px) {
+  @media screen and (max-width: 700px) {
     width: 60%;
     height: 50px;
     padding-left: 20px;
@@ -46,17 +47,25 @@ const OrderFormEl = styled.div`
   align-items: center;
 `;
 
-export const OrderForm = () => {
+export const OrderForm = ({ addOrderForm }) => {
   const isShowOrder = useSelector((state) => state.isShow);
+  const isShowAddOrder = useSelector((state) => state.isAddShow);
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
-  const [emailError, setEmailError] = useState("Почта не может быть пустой");
-  const [nameError, setNameError] = useState("Имя не может быть пустым");
-  const [numberError, setNumberError] = useState(
-    "Телефон не может быть пустой"
-  );
+  const [emailDirty, setEmailDirty] = useState(true);
+  const [nameDirty, setNameDirty] = useState(true);
+  const [numberDirty, setNumberDirty] = useState(true);
+  const [formValid, setFormValid] = useState(false);
+
+  useEffect(() => {
+    if (emailDirty || numberDirty || nameDirty) {
+      setFormValid(false);
+    } else {
+      setFormValid(true);
+    }
+  }, [emailDirty, numberDirty, nameDirty]);
   const fetchFunc = async () => {
     return await axios.post("http://electrical.makser-test.site/api/forms/", {
       email: email,
@@ -65,29 +74,22 @@ export const OrderForm = () => {
     });
   };
   const addOrder = async () => {
-    if (emailError) {
-      alert("Некорректная почта");
-    } else if (numberError) {
-      alert("Некорректный номер");
-    } else if (nameError) {
-      alert("Некорректное имя");
-    } else {
-      fetchFunc();
-      setEmail("");
-      setNumber("");
-      setName("");
-      dispatch(setActiveOrder(!isShowOrder));
+    if (formValid) {
+      initialForm();
+      if (!isShowOrder) {
+        dispatch(setActiveOrder(!isShowOrder));
+      }
+    }
+    if (isShowAddOrder) {
+      dispatch(setActiveAddOrder(!isShowAddOrder));
     }
   };
   const nameHandler = (e) => {
     setName(e.target.value);
-    if (e.target.value.trim().length < 2) {
-      setNameError("Имя слишком короткое");
-    }
-    if (e.target.value.trim().length > 40) {
-      setNameError("Имя слишком длинное");
+    if (e.target.value.trim().length < 2 || e.target.value.trim().length > 40) {
+      setNameDirty(true);
     } else {
-      setNameError("");
+      setNameDirty(false);
     }
   };
   const emailHandler = (e) => {
@@ -95,45 +97,94 @@ export const OrderForm = () => {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(String(e.target.value).toLowerCase())) {
-      setEmailError("Некорректная почта");
+      setEmailDirty(true);
     } else {
-      setEmailError("");
+      setEmailDirty(false);
     }
   };
   const numberHandler = (e) => {
     setNumber(e.target.value);
-    const re = /^\s*\+?375((33\d{7})|(29\d{7})|(44\d{7}|)|(25\d{7}))\s*$/;
+    const re = /^(\+375|80)(29|25|44|33)(\d{3})(\d{2})(\d{2})$/;
     if (!re.test(String(e.target.value))) {
-      setNumberError("Некорректный телефон");
+      setNumberDirty(true);
     } else {
-      setNumberError("");
+      setNumberDirty(false);
     }
   };
-
+  const initialForm = () => {
+    fetchFunc();
+    setEmail("");
+    setNumber("");
+    setName("");
+    setEmailDirty(true);
+    setNumberDirty(true);
+    setNameDirty(true);
+    setFormValid(false);
+  };
   return (
     <>
       <OrderFormEl>
-        <Input
-          name="email"
-          type="email"
-          value={email}
-          onChange={(e) => emailHandler(e)}
-          placeholder="Ваш E-mail"
-        />
-        <Input
-          name="number"
-          type="number"
-          value={number}
-          onChange={(e) => numberHandler(e)}
-          placeholder="+375(99)999-99-99"
-        />
-        <Input
-          name="name"
-          type="text"
-          value={name}
-          onChange={(e) => nameHandler(e)}
-          placeholder="Ваше имя"
-        />
+        {addOrderForm ? (
+          <>
+            <Input
+              className={emailDirty ? "false" : "true"}
+              addOrderForm={addOrderForm}
+              addOrder={addOrder}
+              name="email"
+              type="email"
+              value={email}
+              onChange={(e) => emailHandler(e)}
+              placeholder="Ваш E-mail"
+            />
+            <Input
+              className={numberDirty ? "false" : "true"}
+              addOrderForm={addOrderForm}
+              name="number"
+              type="text"
+              value={number}
+              onChange={(e) => numberHandler(e)}
+              placeholder="+375(99)999-99-99"
+            />
+            <Input
+              className={nameDirty ? "false" : "true"}
+              addOrderForm={addOrderForm}
+              name="name"
+              type="text"
+              value={name}
+              onChange={(e) => nameHandler(e)}
+              placeholder="Ваше имя"
+            />
+          </>
+        ) : (
+          <>
+            <Input
+              className={emailDirty ? "false" : "true"}
+              addOrder={addOrder}
+              name="email"
+              type="email"
+              value={email}
+              onChange={(e) => emailHandler(e)}
+              placeholder="Ваш E-mail"
+            />
+            <Input
+              className={numberDirty ? "false" : "true"}
+              name="number"
+              type="text"
+              value={number}
+              onChange={(e) => numberHandler(e)}
+              placeholder="+375(99)999-99-99"
+            />
+            <Input
+              className={nameDirty ? "false" : "true"}
+              name="name"
+              type="text"
+              value={name}
+              onChange={(e) => nameHandler(e)}
+              placeholder="Ваше имя"
+            />
+          </>
+        )}
+
         <SubButton onClick={() => addOrder()}>Отправить</SubButton>
       </OrderFormEl>
     </>

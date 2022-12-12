@@ -10,7 +10,7 @@ const FeedBackEl = styled.div`
   margin: 0 auto;
   width: 900px;
   padding-bottom: 180px;
-  margin-top: 110px;
+  padding-top: 110px;
   img {
     border-radius: 50%;
     width: 200px;
@@ -30,7 +30,6 @@ const FeedBackEl = styled.div`
     width: 300px;
   }
 `;
-
 const Flex = styled.div`
   display: flex;
   justify-content: space-between;
@@ -53,28 +52,33 @@ const Button = styled.button`
 `;
 export const FeedBack = () => {
   const feedBack = useSelector((state) => state.allInfo.list.review);
-  const [curentFeedBack, setCurrentFeedBack] = useState(0);
+  const [offset, setOffset] = useState([]);
+  const size =
+    window.screen.width < 1120 && window.screen.width > 730
+      ? 700
+      : window.screen.width < 730
+      ? 300
+      : 900;
   const nextFeedBack = () => {
-    if (curentFeedBack < feedBack.length - 1) {
-      setCurrentFeedBack((prev) => prev + 1);
-    } else {
-      setCurrentFeedBack(0);
-    }
+    setOffset((currentOffset) => {
+      const newOffset = currentOffset - size;
+      const maxOffset = -(size * (feedBack.length - 1));
+      return Math.max(newOffset, maxOffset);
+    });
   };
 
   const prevFeedBack = () => {
-    if (curentFeedBack > 0) {
-      setCurrentFeedBack((prev) => prev - 1);
-    } else {
-      setCurrentFeedBack(feedBack.length - 1);
-    }
+    setOffset((currentOffset) => {
+      const newOffset = currentOffset + size;
+      return Math.min(newOffset, 0);
+    });
   };
   return (
     <>
       {feedBack ? (
-        <FeedBackEl>
+        <FeedBackEl id="reviews">
           <Title>Наши отзывы</Title>
-          <Carusel>
+          <Carusel offset={offset}>
             {feedBack?.map((review) => (
               <FeedBackItem key={review.id} {...review} />
             ))}

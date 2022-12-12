@@ -7,9 +7,11 @@ import { Order } from "./components/Order";
 import { Content } from "./components/Content";
 import { Footer } from "./components/Footer";
 import { OrderIsProcessed } from "./components/OrderIsProcessed";
+import { AddOrder } from "./components/AddOrder";
 
 function App() {
   const dispatch = useDispatch();
+  const isAddOrder = useSelector((state) => state.isAddShow);
   const isShowOrder = useSelector((state) => state.isShow);
   useEffect(() => {
     dispatch(getInfoPage());
@@ -21,6 +23,7 @@ function App() {
       <Content />
       <Order />
       <Footer />
+      {isAddOrder && <AddOrder />}
       {isShowOrder && <OrderIsProcessed />}
     </>
   );

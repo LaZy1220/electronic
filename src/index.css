@@ -34,3 +34,11 @@ code {
 .is-active span::after {
   transition-delay: 0s, 0.3s;
 }
+.true {
+  border: 3px solid green;
+  background-color: #daedda !important;
+}
+.false {
+  border: 3px solid red;
+  background-color: #fff1f1 !important;
+}
