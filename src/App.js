@@ -8,11 +8,13 @@ import { Content } from "./components/Content";
 import { Footer } from "./components/Footer";
 import { OrderIsProcessed } from "./components/OrderIsProcessed";
 import { AddOrder } from "./components/AddOrder";
+import { AddFeedBack } from "./components/FeedBack/AddFeedBack";
 
 function App() {
   const dispatch = useDispatch();
   const isAddOrder = useSelector((state) => state.isAddShow);
   const isShowOrder = useSelector((state) => state.isShow);
+  const isAddFeedBack = useSelector((state) => state.isAddFeedBack);
   useEffect(() => {
     dispatch(getInfoPage());
   }, [dispatch]);
@@ -23,6 +25,7 @@ function App() {
       <Content />
       <Order />
       <Footer />
+      {isAddFeedBack && <AddFeedBack />}
       {isAddOrder && <AddOrder />}
       {isShowOrder && <OrderIsProcessed />}
     </>

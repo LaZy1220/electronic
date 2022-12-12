@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Title } from "../Title";
 import Arrow from "../../images/rightArrow.svg";
 import { Carusel } from "./Carusel";
 import { FeedBackItem } from "./FeedBackItem";
+import { setActiveAddFeedBack } from "../features/addFeedBack-slice";
+import { ThankForReview } from "./ThankForReview";
 
 const FeedBackEl = styled.div`
   margin: 0 auto;
@@ -51,7 +53,10 @@ const Button = styled.button`
   }
 `;
 export const FeedBack = () => {
+  const isActiveAddFeedBack = useSelector((state) => state.isAddFeedBack);
   const feedBack = useSelector((state) => state.allInfo.list.review);
+  const isActiveThankForReview = useSelector((state) => state.isThankForReview);
+  const dispatch = useDispatch();
   const [offset, setOffset] = useState([]);
   const size =
     window.screen.width < 1120 && window.screen.width > 730
@@ -91,11 +96,18 @@ export const FeedBack = () => {
                 alt="left"
               />
             </Button>
-            <Button>Оставить отзыв</Button>
+            <Button
+              onClick={() =>
+                dispatch(setActiveAddFeedBack(!isActiveAddFeedBack))
+              }
+            >
+              Оставить отзыв
+            </Button>
             <Button onClick={() => nextFeedBack()}>
               <img src={Arrow} alt="right" />
             </Button>
           </Flex>
+          {isActiveThankForReview && <ThankForReview />}
         </FeedBackEl>
       ) : (
         ""

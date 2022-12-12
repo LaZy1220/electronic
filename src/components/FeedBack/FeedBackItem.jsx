@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Default from "../../images/anonim.png";
 
 const Body = styled.div`
   display: flex;
@@ -35,7 +36,7 @@ const Text = styled.div`
 export const FeedBackItem = ({ image_src, name_surname, review }) => {
   return (
     <Body>
-      <img src={image_src} alt="avatar" />
+      <img src={image_src ? image_src : Default} alt="avatar" />
       <Text>
         <span>{name_surname}</span>
         <p>{review}</p>

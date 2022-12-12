@@ -9,12 +9,13 @@ const AddOrderEl = styled.div`
   padding: 30px;
   border-radius: 40px;
   position: relative;
+  box-shadow: 0px 0px 6px 2px var(--yellow);
   img {
     position: absolute;
     z-index: 1000;
-    height: 40px;
-    width: 40px;
-    top: 10px;
+    height: 30px;
+    width: 30px;
+    top: 20px;
     right: 20px;
     cursor: pointer;
   }
@@ -33,8 +34,8 @@ const Wrapper = styled.div`
 const Title = styled.h3`
   text-align: center;
   padding-top: 15px;
-  font-size: 50px;
-  padding-bottom: 80px;
+  font-size: 40px;
+  padding-bottom: 50px;
   @media screen and (max-width: 1000px) {
     padding-bottom: 40px;
     font-size: 40px;
