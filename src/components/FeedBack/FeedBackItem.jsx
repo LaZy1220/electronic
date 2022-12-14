@@ -9,6 +9,7 @@ const Body = styled.div`
   margin-bottom: 40px;
   @media screen and (max-width: 1120px) {
     flex-direction: column;
+    justify-content: start;
     gap: 20px;
   }
 `;

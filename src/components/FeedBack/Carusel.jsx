@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
-const CaruselEl = styled.div``;
+const CaruselEl = styled.div`
+  @media screen and (max-width: 730px) {
+    height: 450px;
+  }
+  @media screen and (max-width: 730px) {
+    height: 500px;
+  }
+`;
 const Window = styled.div`
   height: 100%;
   width: 100%;

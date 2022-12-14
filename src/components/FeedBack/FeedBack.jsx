@@ -22,7 +22,7 @@ const FeedBackEl = styled.div`
     }
   }
   @media screen and (max-width: 1120px) {
-    padding-bottom: 60px;
+    padding-bottom: 20px;
     display: flex;
     flex-direction: column;
     gap: 30px;

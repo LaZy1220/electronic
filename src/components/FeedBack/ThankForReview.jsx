@@ -41,7 +41,7 @@ const Button = styled.button`
 
 export const ThankForReview = () => {
   const isActiveThankForReview = useSelector((state) => state.isThankForReview);
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
   return (
     <Wrapper>
       <ThankForReviewEl>
