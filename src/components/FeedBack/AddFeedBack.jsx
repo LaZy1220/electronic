@@ -124,14 +124,23 @@ export const AddFeedBack = () => {
   };
   const fetchFunc = async () => {
     debugger;
-    const formData = new FormData();
-    formData.append("image", selectedFile);
-    formData.append("name_surname", name);
-    formData.append("review", review);
-    console.log(formData);
+    let response;
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append("image", selectedFile);
+      formData.append("name_surname", name);
+      formData.append("review", review);
+      response = formData;
+    } else {
+      response = {
+        image: selectedFile,
+        name_surname: name,
+        review: review,
+      };
+    }
     return await axios.post(
       "http://electrical.makser-test.site/api/review-post/",
-      formData
+      response
     );
   };
   useEffect(() => {

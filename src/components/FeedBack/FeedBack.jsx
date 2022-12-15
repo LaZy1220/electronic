@@ -13,6 +13,7 @@ const FeedBackEl = styled.div`
   width: 900px;
   padding-bottom: 180px;
   padding-top: 110px;
+  position: relative;
   img {
     border-radius: 50%;
     width: 200px;
@@ -29,6 +30,7 @@ const FeedBackEl = styled.div`
     width: 700px;
   }
   @media screen and (max-width: 730px) {
+    gap: 0;
     width: 300px;
   }
 `;

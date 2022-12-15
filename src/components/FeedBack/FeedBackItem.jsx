@@ -7,6 +7,10 @@ const Body = styled.div`
   max-width: 100%;
   justify-content: space-between;
   margin-bottom: 40px;
+  img {
+    display: flex;
+    flex-shrink: 0;
+  }
   @media screen and (max-width: 1120px) {
     flex-direction: column;
     justify-content: start;
@@ -28,7 +32,8 @@ const Text = styled.div`
     font-weight: bold;
     margin-top: 20px;
     @media screen and (max-width: 1120px) {
-      margin-top: 10px;
+      margin-top: 0;
+      margin-bottom: 10px;
       text-align: center;
     }
   }

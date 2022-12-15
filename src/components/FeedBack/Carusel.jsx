@@ -1,11 +1,21 @@
+import { useState } from "react";
 import styled from "styled-components";
+import Arrows from "../../images/arrowDown.png";
 
 const CaruselEl = styled.div`
   @media screen and (max-width: 730px) {
-    height: 450px;
+    height: 360px;
   }
-  @media screen and (max-width: 730px) {
-    height: 500px;
+`;
+const ReadMore = styled.span`
+  font-size: 14px;
+  padding: 15px;
+  left: 170px;
+  position: relative;
+  cursor: pointer;
+  img {
+    width: 12px !important;
+    height: 12px !important;
   }
 `;
 const Window = styled.div`
@@ -24,17 +34,23 @@ const Conteiner = styled.div`
 `;
 
 export const Carusel = ({ children, offset }) => {
+  const [isResizeBlock, setIsResizeBlock] = useState(false);
   return (
-    <CaruselEl>
-      <Window>
-        <Conteiner
-          style={{
-            transform: `translateX(${offset}px)`,
-          }}
-        >
-          {children}
-        </Conteiner>
-      </Window>
-    </CaruselEl>
+    <>
+      <CaruselEl>
+        <Window>
+          <Conteiner
+            style={{
+              transform: `translateX(${offset}px)`,
+            }}
+          >
+            {children}
+          </Conteiner>
+        </Window>
+      </CaruselEl>
+      <ReadMore>
+        Читаль больше <img src={Arrows} alt="arrows" />
+      </ReadMore>
+    </>
   );
 };
