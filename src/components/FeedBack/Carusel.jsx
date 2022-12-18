@@ -31,7 +31,7 @@ const Conteiner = styled.div`
   display: flex;
   transition: translate;
   transition-property: transform;
-  transition-duration: 500ms;
+  transition-duration: 1000ms;
   transition-timing-function: ease-in-out;
 `;
 

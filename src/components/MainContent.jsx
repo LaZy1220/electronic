@@ -77,7 +77,7 @@ export const MainContent = () => {
   const isAddOrderShow = useSelector((state) => state.isAddShow);
   const dispatch = useDispatch();
   return (
-    <BackGround>
+    <BackGround id="/">
       <Body>
         <Title>Электромонтажные работы</Title>
         <Text>По Минску и Минскому району</Text>

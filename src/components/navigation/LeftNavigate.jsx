@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-scroll";
 
 const Ul = styled.ul`
   width: 250px;
@@ -25,22 +26,57 @@ export const LeftNavigate = ({ isActive, width }) => {
   return (
     <Ul isActive={isActive} width={width}>
       <li>
-        <a href="#our-services">Услуги</a>
+        <Link to="/" spy={true} smooth={true} offset={0} duration={700}>
+          Главная
+        </Link>
       </li>
       <li>
-        <a href="#stages-work">Этапы работы</a>
+        <Link
+          to="our-services"
+          spy={true}
+          smooth={true}
+          offset={50}
+          duration={700}
+        >
+          Услуги
+        </Link>
       </li>
       <li>
-        <a href="#advantages">Приемущества</a>
+        <Link
+          to="stages-work"
+          spy={true}
+          smooth={true}
+          offset={50}
+          duration={700}
+        >
+          Этапы работы
+        </Link>
       </li>
       <li>
-        <a href="#price">Прайс</a>
+        <Link
+          to="advantages"
+          spy={true}
+          smooth={true}
+          offset={50}
+          duration={700}
+        >
+          Приемущества
+        </Link>
       </li>
       <li>
-        <a href="#reviews">Отзывы</a>
+        <Link to="price" spy={true} smooth={true} offset={50} duration={700}>
+          Прайс
+        </Link>
       </li>
       <li>
-        <a href="#order">Заказать</a>
+        <Link to="reviews" spy={true} smooth={true} offset={50} duration={700}>
+          Отзывы
+        </Link>
+      </li>
+      <li>
+        <Link to="order" spy={true} smooth={true} offset={50} duration={700}>
+          Заказать
+        </Link>
       </li>
     </Ul>
   );
