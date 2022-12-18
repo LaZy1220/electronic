@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-scroll";
 import { Burger } from "./Burger";
@@ -35,12 +36,30 @@ const NavigateEl = styled.nav`
 `;
 
 export const Navigate = ({ width }) => {
+  const [color, setColor] = useState(false);
+  const prevScrollpos = window.pageYOffset;
+  const changeColor = () => {
+    const currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+      setColor(true);
+    } else {
+      setColor(false);
+    }
+  };
+  window.addEventListener("scroll", changeColor);
   return (
     <>
-      <NavigateEl>
+      <NavigateEl className={color ? "show-navigate" : "hide-navigate"}>
         <ul>
           <li>
-            <Link to="/" spy={true} smooth={true} offset={0} duration={700}>
+            <Link
+              className="active-block"
+              to="/"
+              spy={true}
+              smooth={true}
+              offset={0}
+              duration={700}
+            >
               Главная
             </Link>
           </li>

@@ -23,7 +23,6 @@ function App() {
   window.addEventListener("resize", function () {
     setWidth(this.window.innerWidth);
   });
-
   return (
     <>
       <MainContent />

@@ -42,3 +42,11 @@ code {
   border: 3px solid red;
   background-color: #fff1f1 !important;
 }
+.hide-navigate {
+  opacity: 0;
+  transition: 0.2s ease-in;
+}
+.show-navigate {
+  opacity: 1;
+  transition: 0.2s ease-in;
+}

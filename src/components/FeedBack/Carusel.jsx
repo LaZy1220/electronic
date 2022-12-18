@@ -46,7 +46,6 @@ export const Carusel = ({
   const reviews = useSelector(
     (state) => state.allInfo.list.review[currentIndexRewiev].review
   );
-  console.log(reviews.length);
   return (
     <>
       <CaruselEl isResizeBlock={isResizeBlock}>
