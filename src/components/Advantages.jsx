@@ -5,7 +5,7 @@ import img2 from "../images/advImg2.png";
 import img3 from "../images/advImg3.png";
 import img4 from "../images/advImg4.png";
 
-const AdvantagesEl = styled.div`
+const AdvantagesEl = styled.section`
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("https://static.tildacdn.com/lib/unsplash/1789ed6d-f801-4247-eb9b-bcad707348ae/photo.jpg");
   background-position: center center;

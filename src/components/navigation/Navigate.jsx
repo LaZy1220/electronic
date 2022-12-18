@@ -36,10 +36,10 @@ const NavigateEl = styled.nav`
 `;
 
 export const Navigate = ({ width }) => {
-  const [color, setColor] = useState(false);
-  const prevScrollpos = window.pageYOffset;
+  const [color, setColor] = useState(true);
+  let prevScrollpos = window.pageYOffset;
   const changeColor = () => {
-    const currentScrollPos = window.pageYOffset;
+    let currentScrollPos = window.pageYOffset;
     if (prevScrollpos > currentScrollPos) {
       setColor(true);
     } else {

@@ -4,10 +4,11 @@ import { Title } from "../Title";
 import { Service } from "./Service";
 import { useState } from "react";
 
-const ServicesEl = styled.div`
+const ServicesEl = styled.section`
   margin: auto 180px;
   margin-top: 110px;
-  padding-bottom: 20px;
+  padding-bottom: 70px;
+  border-bottom: 6px solid var(--yellow);
   @media screen and (max-width: 1120px) {
     margin-left: 5%;
     margin-right: 5%;

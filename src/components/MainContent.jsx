@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import BgImg from "../images/mainBg.jpg";
 import { setActiveAddOrder } from "./features/isShowAddOrder-slice";
 
-const BackGround = styled.div`
+const BackGround = styled.section`
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url(${BgImg});
   background-repeat: no-repeat;

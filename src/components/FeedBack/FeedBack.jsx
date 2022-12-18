@@ -8,7 +8,7 @@ import { FeedBackItem } from "./FeedBackItem";
 import { setActiveAddFeedBack } from "../features/addFeedBack-slice";
 import { ThankForReview } from "./ThankForReview";
 
-const FeedBackEl = styled.div`
+const FeedBackEl = styled.section`
   margin: 0 auto;
   width: 900px;
   padding-bottom: 180px;

@@ -6,7 +6,7 @@ import Card2 from "../images/card2.jpeg";
 import Card3 from "../images/card3.jpg";
 import Card4 from "../images/card4.jpeg";
 
-const OurServicesEl = styled.div`
+const OurServicesEl = styled.section`
   text-align: center;
   padding-top: 110px;
   @media screen and (max-width: 1120px) {

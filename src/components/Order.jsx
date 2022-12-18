@@ -3,7 +3,7 @@ import OrderBg from "../images/orderBg.png";
 import { OrderForm } from "./OrderForm";
 import { Title } from "./Title";
 
-const OrderEl = styled.div`
+const OrderEl = styled.section`
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(${OrderBg});
   background-position: top top;
