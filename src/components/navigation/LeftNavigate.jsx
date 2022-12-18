@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Ul = styled.ul`
   width: 250px;
   margin-left: ${({ isActive, width }) =>
-    isActive && width < 1120 ? "0" : "-250px"};
+    isActive && width < 1130 ? "0" : "-250px"};
   background: black;
   position: fixed;
   left: 0;

@@ -1,8 +1,23 @@
 import styled from "styled-components";
+import Arrows from "../../images/arrowDown.png";
 
 const CaruselEl = styled.div`
+  position: relative;
+  transition: all ease 1s;
   @media screen and (max-width: 730px) {
-    height: ${({ isResizeBlock }) => (isResizeBlock ? "auto" : "360px")};
+    height: ${({ isResizeBlock }) => (isResizeBlock ? "490px" : "360px")};
+  }
+`;
+const ReadMore = styled.span`
+  font-size: 14px;
+  padding: 15px;
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  cursor: pointer;
+  img {
+    width: 12px !important;
+    height: 12px !important;
   }
 `;
 const Window = styled.div`
@@ -20,7 +35,13 @@ const Conteiner = styled.div`
   transition-timing-function: ease-in-out;
 `;
 
-export const Carusel = ({ children, offset, isResizeBlock }) => {
+export const Carusel = ({
+  children,
+  offset,
+  width,
+  isResizeBlock,
+  handleResize,
+}) => {
   return (
     <>
       <CaruselEl isResizeBlock={isResizeBlock}>
@@ -34,6 +55,26 @@ export const Carusel = ({ children, offset, isResizeBlock }) => {
           </Conteiner>
         </Window>
       </CaruselEl>
+      {width < 730 ? (
+        isResizeBlock ? (
+          <ReadMore onClick={() => handleResize()}>
+            Скрыть {""}
+            <img
+              src={Arrows}
+              style={{
+                transform: "rotate(180deg)",
+              }}
+              alt="arrows"
+            />
+          </ReadMore>
+        ) : (
+          <ReadMore onClick={() => handleResize()}>
+            Читаль больше <img src={Arrows} alt="arrows" />
+          </ReadMore>
+        )
+      ) : (
+        ""
+      )}
     </>
   );
 };

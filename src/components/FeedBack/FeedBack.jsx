@@ -30,11 +30,11 @@ const FeedBackEl = styled.div`
     width: 700px;
   }
   @media screen and (max-width: 730px) {
-    gap: 50px;
     width: 300px;
   }
 `;
 const Flex = styled.div`
+  padding-top: 10px;
   display: flex;
   justify-content: space-between;
 `;
@@ -106,15 +106,14 @@ export const FeedBack = ({ width }) => {
       {feedBack ? (
         <FeedBackEl id="reviews" isResizeBlock={isResizeBlock}>
           <Title>Наши отзывы</Title>
-          <Carusel offset={offset} width={width}>
+          <Carusel
+            offset={offset}
+            width={width}
+            isResizeBlock={isResizeBlock}
+            handleResize={handleResize}
+          >
             {feedBack?.map((review) => (
-              <FeedBackItem
-                isResizeBlock={isResizeBlock}
-                handleResize={handleResize}
-                key={review.id}
-                width={width}
-                {...review}
-              />
+              <FeedBackItem key={review.id} {...review} />
             ))}
           </Carusel>
           <Flex>

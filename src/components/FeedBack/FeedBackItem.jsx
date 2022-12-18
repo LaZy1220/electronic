@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Default from "../../images/anonim.png";
-import Arrows from "../../images/arrowDown.png";
 const Body = styled.div`
   display: flex;
   min-width: 100%;
@@ -25,6 +24,7 @@ const Text = styled.div`
     @media screen and (max-width: 1120px) {
       width: 100%;
       text-align: center;
+      padding-bottom: 40px;
     }
   }
   span {
@@ -39,26 +39,7 @@ const Text = styled.div`
     }
   }
 `;
-const ReadMore = styled.span`
-  font-size: 14px;
-  padding: 15px;
-  position: absolute;
-  bottom: -90px;
-  right: 0px;
-  cursor: pointer;
-  img {
-    width: 12px !important;
-    height: 12px !important;
-  }
-`;
-export const FeedBackItem = ({
-  image_src,
-  name_surname,
-  review,
-  isResizeBlock,
-  handleResize,
-  width,
-}) => {
+export const FeedBackItem = ({ image_src, name_surname, review }) => {
   return (
     <Body>
       <img src={image_src ? image_src : Default} alt="avatar" />
