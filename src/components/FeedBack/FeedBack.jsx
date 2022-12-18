@@ -58,10 +58,25 @@ const Button = styled.button`
 export const FeedBack = ({ width }) => {
   const isActiveAddFeedBack = useSelector((state) => state.isAddFeedBack);
   const [isResizeBlock, setIsResizeBlock] = useState(false);
+  const [currentIndexRewiev, setCurrentIndexRewiev] = useState(0);
   const feedBack = useSelector((state) => state.allInfo.list.review);
   const isActiveThankForReview = useSelector((state) => state.isThankForReview);
   const dispatch = useDispatch();
   const [offset, setOffset] = useState([]);
+  const incIndexRewiev = () => {
+    if (currentIndexRewiev < feedBack.length - 1) {
+      setCurrentIndexRewiev((prev) => prev + 1);
+    } else {
+      setCurrentIndexRewiev(feedBack.length - 1);
+    }
+  };
+  const decIndexRewiev = () => {
+    if (currentIndexRewiev > 0) {
+      setCurrentIndexRewiev((prev) => prev - 1);
+    } else {
+      setCurrentIndexRewiev(0);
+    }
+  };
   const handleResize = () => {
     setIsResizeBlock(!isResizeBlock);
   };
@@ -82,6 +97,7 @@ export const FeedBack = ({ width }) => {
       }
     });
     setIsResizeBlock(false);
+    incIndexRewiev();
   };
   const prevFeedBack = () => {
     setOffset((currentOffset) => {
@@ -97,6 +113,7 @@ export const FeedBack = ({ width }) => {
       }
     });
     setIsResizeBlock(false);
+    decIndexRewiev();
   };
   useEffect(() => {
     setOffset(0);
@@ -111,6 +128,7 @@ export const FeedBack = ({ width }) => {
             width={width}
             isResizeBlock={isResizeBlock}
             handleResize={handleResize}
+            currentIndexRewiev={currentIndexRewiev}
           >
             {feedBack?.map((review) => (
               <FeedBackItem key={review.id} {...review} />

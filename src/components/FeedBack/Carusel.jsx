@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Arrows from "../../images/arrowDown.png";
-
+import { useSelector } from "react-redux";
 const CaruselEl = styled.div`
   position: relative;
   transition: all ease 1s;
@@ -41,7 +41,12 @@ export const Carusel = ({
   width,
   isResizeBlock,
   handleResize,
+  currentIndexRewiev,
 }) => {
+  const reviews = useSelector(
+    (state) => state.allInfo.list.review[currentIndexRewiev].review
+  );
+  console.log(reviews.length);
   return (
     <>
       <CaruselEl isResizeBlock={isResizeBlock}>
@@ -55,7 +60,7 @@ export const Carusel = ({
           </Conteiner>
         </Window>
       </CaruselEl>
-      {width < 730 ? (
+      {width < 730 && reviews.length > 150 ? (
         isResizeBlock ? (
           <ReadMore onClick={() => handleResize()}>
             Скрыть {""}
