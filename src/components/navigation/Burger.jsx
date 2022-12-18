@@ -46,7 +46,7 @@ const BurgerEl = styled.div`
   }
 `;
 
-export const Burger = () => {
+export const Burger = ({ width }) => {
   const dispatch = useDispatch();
   const isActive = useSelector((state) => state.active);
   return (
@@ -59,7 +59,7 @@ export const Burger = () => {
         <div />
         <div />
       </BurgerEl>
-      <LeftNavigate isActive={isActive} />
+      <LeftNavigate isActive={isActive} width={width} />
     </>
   );
 };

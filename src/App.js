@@ -9,20 +9,26 @@ import { Footer } from "./components/Footer";
 import { OrderIsProcessed } from "./components/OrderIsProcessed";
 import { AddOrder } from "./components/AddOrder";
 import { AddFeedBack } from "./components/FeedBack/AddFeedBack";
+import { useState } from "react";
 
 function App() {
   const dispatch = useDispatch();
   const isAddOrder = useSelector((state) => state.isAddShow);
   const isShowOrder = useSelector((state) => state.isShow);
   const isAddFeedBack = useSelector((state) => state.isAddFeedBack);
+  const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
     dispatch(getInfoPage());
   }, [dispatch]);
+  window.addEventListener("resize", function () {
+    setWidth(this.window.innerWidth);
+  });
+
   return (
     <>
       <MainContent />
-      <Navigate />
-      <Content />
+      <Navigate width={width} />
+      <Content width={width} />
       <Order />
       <Footer />
       {isAddFeedBack && <AddFeedBack />}

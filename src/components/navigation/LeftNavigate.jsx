@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 const Ul = styled.ul`
   width: 250px;
-  margin-left: ${({ isActive }) => (isActive ? "0" : "-250px")};
+  margin-left: ${({ isActive, width }) =>
+    isActive && width < 1120 ? "0" : "-250px"};
   background: black;
   position: fixed;
   left: 0;
@@ -20,9 +21,9 @@ const Ul = styled.ul`
     font-size: 20px;
   }
 `;
-export const LeftNavigate = ({ isActive }) => {
+export const LeftNavigate = ({ isActive, width }) => {
   return (
-    <Ul isActive={isActive}>
+    <Ul isActive={isActive} width={width}>
       <li>
         <a href="#our-services">Услуги</a>
       </li>

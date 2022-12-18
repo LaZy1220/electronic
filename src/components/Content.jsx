@@ -12,8 +12,7 @@ const ContentEl = styled.div`
   background-size: cover;
   background-attachment: fixed;
 `;
-
-export const Content = () => {
+export const Content = ({ width }) => {
   return (
     <>
       <ContentEl>
@@ -21,7 +20,7 @@ export const Content = () => {
         <StagesWork />
         <Advantages />
         <Services />
-        <FeedBack />
+        <FeedBack width={width} />
       </ContentEl>
     </>
   );

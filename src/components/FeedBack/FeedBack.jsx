@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Title } from "../Title";
@@ -30,7 +30,7 @@ const FeedBackEl = styled.div`
     width: 700px;
   }
   @media screen and (max-width: 730px) {
-    gap: 0;
+    gap: 50px;
     width: 300px;
   }
 `;
@@ -54,40 +54,67 @@ const Button = styled.button`
     height: 30px;
   }
 `;
-export const FeedBack = () => {
+
+export const FeedBack = ({ width }) => {
   const isActiveAddFeedBack = useSelector((state) => state.isAddFeedBack);
+  const [isResizeBlock, setIsResizeBlock] = useState(false);
   const feedBack = useSelector((state) => state.allInfo.list.review);
   const isActiveThankForReview = useSelector((state) => state.isThankForReview);
   const dispatch = useDispatch();
   const [offset, setOffset] = useState([]);
-  const size =
-    window.screen.width < 1120 && window.screen.width > 730
-      ? 700
-      : window.screen.width < 730
-      ? 300
-      : 900;
+  const handleResize = () => {
+    setIsResizeBlock(!isResizeBlock);
+  };
   const nextFeedBack = () => {
     setOffset((currentOffset) => {
-      const newOffset = currentOffset - size;
-      const maxOffset = -(size * (feedBack.length - 1));
-      return Math.max(newOffset, maxOffset);
+      if (width > 1130) {
+        const newOffset = currentOffset - 900;
+        const maxOffset = -(900 * (feedBack.length - 1));
+        return Math.max(newOffset, maxOffset);
+      } else if (width < 1130 && width > 730) {
+        const newOffset = currentOffset - 700;
+        const maxOffset = -(700 * (feedBack.length - 1));
+        return Math.max(newOffset, maxOffset);
+      } else {
+        const newOffset = currentOffset - 300;
+        const maxOffset = -(300 * (feedBack.length - 1));
+        return Math.max(newOffset, maxOffset);
+      }
     });
+    setIsResizeBlock(false);
   };
-
   const prevFeedBack = () => {
     setOffset((currentOffset) => {
-      const newOffset = currentOffset + size;
-      return Math.min(newOffset, 0);
+      if (width > 1130) {
+        const newOffset = currentOffset + 900;
+        return Math.min(newOffset, 0);
+      } else if (width < 1130 && width > 730) {
+        const newOffset = currentOffset + 700;
+        return Math.min(newOffset, 0);
+      } else {
+        const newOffset = currentOffset + 300;
+        return Math.min(newOffset, 0);
+      }
     });
+    setIsResizeBlock(false);
   };
+  useEffect(() => {
+    setOffset(0);
+  }, [width]);
   return (
     <>
       {feedBack ? (
-        <FeedBackEl id="reviews">
+        <FeedBackEl id="reviews" isResizeBlock={isResizeBlock}>
           <Title>Наши отзывы</Title>
-          <Carusel offset={offset}>
+          <Carusel offset={offset} width={width}>
             {feedBack?.map((review) => (
-              <FeedBackItem key={review.id} {...review} />
+              <FeedBackItem
+                isResizeBlock={isResizeBlock}
+                handleResize={handleResize}
+                key={review.id}
+                width={width}
+                {...review}
+              />
             ))}
           </Carusel>
           <Flex>

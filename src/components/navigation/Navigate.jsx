@@ -33,7 +33,7 @@ const NavigateEl = styled.nav`
   }
 `;
 
-export const Navigate = () => {
+export const Navigate = ({ width }) => {
   return (
     <>
       <NavigateEl>
@@ -58,7 +58,7 @@ export const Navigate = () => {
           </li>
         </ul>
       </NavigateEl>
-      <Burger />
+      <Burger width={width} />
     </>
   );
 };

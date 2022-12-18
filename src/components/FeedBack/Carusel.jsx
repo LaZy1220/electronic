@@ -1,21 +1,8 @@
-import { useState } from "react";
 import styled from "styled-components";
-import Arrows from "../../images/arrowDown.png";
 
 const CaruselEl = styled.div`
   @media screen and (max-width: 730px) {
-    height: 360px;
-  }
-`;
-const ReadMore = styled.span`
-  font-size: 14px;
-  padding: 15px;
-  left: 170px;
-  position: relative;
-  cursor: pointer;
-  img {
-    width: 12px !important;
-    height: 12px !important;
+    height: ${({ isResizeBlock }) => (isResizeBlock ? "auto" : "360px")};
   }
 `;
 const Window = styled.div`
@@ -33,11 +20,10 @@ const Conteiner = styled.div`
   transition-timing-function: ease-in-out;
 `;
 
-export const Carusel = ({ children, offset }) => {
-  const [isResizeBlock, setIsResizeBlock] = useState(false);
+export const Carusel = ({ children, offset, isResizeBlock }) => {
   return (
     <>
-      <CaruselEl>
+      <CaruselEl isResizeBlock={isResizeBlock}>
         <Window>
           <Conteiner
             style={{
@@ -48,9 +34,6 @@ export const Carusel = ({ children, offset }) => {
           </Conteiner>
         </Window>
       </CaruselEl>
-      <ReadMore>
-        Читаль больше <img src={Arrows} alt="arrows" />
-      </ReadMore>
     </>
   );
 };
