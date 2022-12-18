@@ -6,7 +6,7 @@
     "Lucida Sans", Arial, sans-serif;
 }
 :root {
-  --yellow: rgb(255 220 18);
+  --yellow: rgb(37 149 54);
 }
 body {
   width: 100%;
@@ -50,6 +50,7 @@ code {
   opacity: 1;
   transition: 0.15s ease-in;
 }
-.nav-item > .active {
-  border-bottom: 1px solid #333;
+.active-block {
+  color: white !important;
+  border-bottom: 3px solid white;
 }

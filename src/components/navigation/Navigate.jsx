@@ -53,7 +53,7 @@ export const Navigate = ({ width }) => {
         <ul>
           <li>
             <Link
-              className="active-block"
+              activeClass="active-block"
               to="/"
               spy={true}
               smooth={true}
@@ -65,10 +65,11 @@ export const Navigate = ({ width }) => {
           </li>
           <li>
             <Link
+              activeClass="active-block"
               to="our-services"
               spy={true}
               smooth={true}
-              offset={50}
+              offset={0}
               duration={700}
             >
               Услуги
@@ -76,10 +77,11 @@ export const Navigate = ({ width }) => {
           </li>
           <li>
             <Link
+              activeClass="active-block"
               to="stages-work"
               spy={true}
               smooth={true}
-              offset={50}
+              offset={0}
               duration={700}
             >
               Этапы работы
@@ -87,10 +89,11 @@ export const Navigate = ({ width }) => {
           </li>
           <li>
             <Link
+              activeClass="active-block"
               to="advantages"
               spy={true}
               smooth={true}
-              offset={50}
+              offset={0}
               duration={700}
             >
               Приемущества
@@ -98,10 +101,11 @@ export const Navigate = ({ width }) => {
           </li>
           <li>
             <Link
+              activeClass="active-block"
               to="price"
               spy={true}
               smooth={true}
-              offset={50}
+              offset={-50}
               duration={700}
             >
               Прайс
@@ -109,10 +113,11 @@ export const Navigate = ({ width }) => {
           </li>
           <li>
             <Link
+              activeClass="active-block"
               to="reviews"
               spy={true}
               smooth={true}
-              offset={50}
+              offset={0}
               duration={700}
             >
               Отзывы
@@ -120,10 +125,11 @@ export const Navigate = ({ width }) => {
           </li>
           <li>
             <Link
+              activeClass="active-block"
               to="order"
               spy={true}
               smooth={true}
-              offset={50}
+              offset={0}
               duration={700}
             >
               Заказать

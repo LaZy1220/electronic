@@ -28,7 +28,7 @@ const BgNumber = styled.div`
   transform: translate(-50%, -50%);
   font-size: 160px;
   font-weight: bold;
-  color: rgb(255 220 18);
+  color: var(--yellow);
   opacity: 0.7;
 `;
 
