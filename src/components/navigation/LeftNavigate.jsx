@@ -15,6 +15,7 @@ const Ul = styled.ul`
   padding: 20px;
   li {
     list-style: none;
+    padding-top: 10px;
   }
   a {
     text-decoration: none;

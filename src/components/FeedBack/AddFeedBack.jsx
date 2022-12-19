@@ -6,7 +6,6 @@ import { setActiveAddFeedBack } from "../features/addFeedBack-slice";
 import axios from "axios";
 import { useEffect } from "react";
 import { setActiveThankForReview } from "../features/thankForReview-slice";
-import { findAllInRenderedTree } from "react-dom/test-utils";
 
 const Wrapper = styled.div`
   position: fixed;
@@ -125,34 +124,35 @@ export const AddFeedBack = () => {
     if (formValid) {
       fetchFunc();
       dispatch(setActiveAddFeedBack(!isAddFeedBack));
-      dispatch(setActiveThankForReview(!isActiveThankForReview));
     }
   };
   const fetchFunc = async () => {
+    let dataToSend;
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append("image", selectedFile);
+      formData.append("name_surname", name);
+      formData.append("review", review);
+      dataToSend = formData;
+    } else {
+      dataToSend = {
+        image: selectedFile,
+        name_surname: name,
+        review: review,
+      };
+    }
     try {
-      let dataToSend;
-      if (selectedFile) {
-        const formData = new FormData();
-        formData.append("image", selectedFile);
-        formData.append("name_surname", name);
-        formData.append("review", review);
-        dataToSend = formData;
-      } else {
-        dataToSend = {
-          image: selectedFile,
-          name_surname: name,
-          review: review,
-        };
-      }
       const response = await axios.post(
         "http://electrical.makser-test.site/api/review-post/",
         dataToSend
       );
+      console.log(response);
       if (response.data.error) {
         alert(response.data.error);
       }
+      dispatch(setActiveThankForReview(!isActiveThankForReview));
     } catch (e) {
-      alert(e);
+      alert(e.request.responseText);
     }
   };
   useEffect(() => {

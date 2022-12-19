@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Cross from "../images/cross.svg";
+import { setCheckForm } from "./features/isCheckForm-slice";
 import { setActiveAddOrder } from "./features/isShowAddOrder-slice";
 import { OrderForm } from "./OrderForm";
 
@@ -49,15 +50,18 @@ const Title = styled.h3`
 export const AddOrder = () => {
   const addOrderForm = true;
   const isAddOrderShow = useSelector((state) => state.isAddShow);
+  const isCheckFrom = useSelector((state) => state.isCheckForm);
   const dispatch = useDispatch();
+  const closeModal = () => {
+    if (isCheckFrom) {
+      dispatch(setCheckForm(!isCheckFrom));
+    }
+    dispatch(setActiveAddOrder(!isAddOrderShow));
+  };
   return (
     <Wrapper>
       <AddOrderEl>
-        <img
-          onClick={() => dispatch(setActiveAddOrder(!isAddOrderShow))}
-          src={Cross}
-          alt="X"
-        />
+        <img onClick={() => closeModal()} src={Cross} alt="X" />
         <Title>Заказать услугу</Title>
         <OrderForm addOrderForm={addOrderForm} />
       </AddOrderEl>

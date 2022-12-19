@@ -14,7 +14,7 @@ const BurgerEl = styled.div`
   top: 10px;
   right: 10px;
   padding-left: ${({ isActive }) => (isActive ? "5px" : "0")};
-  background-color: ${({ isActive }) => (isActive ? "green" : "var(--yellow)")};
+  background-color: ${({ isActive }) => (isActive ? "red" : "var(--yellow)")};
   gap: 8px;
   flex-flow: column;
   div {

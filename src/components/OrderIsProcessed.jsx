@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Cross from "../images/cross.svg";
+import { setCheckForm } from "./features/isCheckForm-slice";
 import { setActiveOrder } from "./features/isShowOrder-slice";
 
 const OrderEl = styled.div`
@@ -67,7 +68,13 @@ const Conteiner = styled.div`
 export const OrderIsProcessed = () => {
   const dispatch = useDispatch();
   const isShow = useSelector((state) => state.isShow);
-
+  const isCheckForm = useSelector((state) => state.isCheckForm);
+  const closeModal = () => {
+    if (isCheckForm) {
+      dispatch(setCheckForm(!isCheckForm));
+    }
+    dispatch(setActiveOrder(!isShow));
+  };
   return (
     <Conteiner>
       <OrderEl>
@@ -78,9 +85,7 @@ export const OrderIsProcessed = () => {
         />
         <h1>Ваш заказ успешно добавлен</h1>
         <p>Мы обязательно с вами свяжемся, как освободятся специалиты</p>
-        <button onClick={() => dispatch(setActiveOrder(!isShow))}>
-          Закрыть
-        </button>
+        <button onClick={() => closeModal()}>Закрыть</button>
       </OrderEl>
     </Conteiner>
   );

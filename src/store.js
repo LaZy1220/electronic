@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { addFeedBackReducer } from "./components/features/addFeedBack-slice";
 import { allInfoReducer } from "./components/features/allInfo-slice";
+import { isCheckFormReducer } from "./components/features/isCheckForm-slice";
 import { isAddShowReducer } from "./components/features/isShowAddOrder-slice";
 import { isShowReducer } from "./components/features/isShowOrder-slice";
 import { menuReducer } from "./components/features/menu-slice";
@@ -14,6 +15,7 @@ export const store = configureStore({
     isThankForReview: isThankForReviewReducer,
     allInfo: allInfoReducer,
     active: menuReducer,
+    isCheckForm: isCheckFormReducer,
   },
   devTools: true,
 });

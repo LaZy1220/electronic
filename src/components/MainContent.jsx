@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import BgImg from "../images/mainBg.jpg";
+import { setCheckForm } from "./features/isCheckForm-slice";
 import { setActiveAddOrder } from "./features/isShowAddOrder-slice";
 
 const BackGround = styled.section`
@@ -75,7 +76,14 @@ const Button = styled.button`
 
 export const MainContent = () => {
   const isAddOrderShow = useSelector((state) => state.isAddShow);
+  const isCheckForm = useSelector((state) => state.isCheckForm);
   const dispatch = useDispatch();
+  const addOrder = () => {
+    dispatch(setActiveAddOrder(!isAddOrderShow));
+    if (isCheckForm) {
+      dispatch(setCheckForm(!isCheckForm));
+    }
+  };
   return (
     <BackGround id="/">
       <Body>
@@ -83,9 +91,7 @@ export const MainContent = () => {
         <Text>По Минску и Минскому району</Text>
         <Text>Контакты</Text>
         <Text number>+375 (29) 114-02-88</Text>
-        <Button onClick={() => dispatch(setActiveAddOrder(!isAddOrderShow))}>
-          Заказать услугу
-        </Button>
+        <Button onClick={() => addOrder()}>Заказать услугу</Button>
       </Body>
     </BackGround>
   );

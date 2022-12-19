@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { setActiveAddOrder } from "./features/isShowAddOrder-slice";
+import { setCheckForm } from "./features/isCheckForm-slice";
 import { setActiveOrder } from "./features/isShowOrder-slice";
 
 const Input = styled.input`
@@ -49,7 +49,7 @@ const OrderFormEl = styled.div`
 
 export const OrderForm = ({ addOrderForm }) => {
   const isShowOrder = useSelector((state) => state.isShow);
-  const isShowAddOrder = useSelector((state) => state.isAddShow);
+  const isCheckForm = useSelector((state) => state.isCheckForm);
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -67,31 +67,35 @@ export const OrderForm = ({ addOrderForm }) => {
     }
   }, [emailDirty, numberDirty, nameDirty]);
   const fetchFunc = async () => {
-    return await axios.post("http://electrical.makser-test.site/api/forms/", {
-      email: email,
-      username: name,
-      number: number,
-    });
+    try {
+      const response = await axios.post(
+        "http://electrical.makser-test.site/api/forms/",
+        {
+          email: email,
+          username: name,
+          number: number,
+        }
+      );
+      dispatch(setActiveOrder(!isShowOrder));
+      if (response.data.error) {
+        alert(response.data.error);
+      }
+    } catch (e) {
+      console.log(e);
+      alert(e.request.responseText);
+    }
   };
   const addOrder = async () => {
+    if (!isCheckForm) {
+      dispatch(setCheckForm(!isCheckForm));
+    }
     if (formValid) {
       initialForm();
-      if (!isShowOrder) {
-        dispatch(setActiveOrder(!isShowOrder));
-      }
-    }
-    if (isShowAddOrder) {
-      dispatch(setActiveAddOrder(!isShowAddOrder));
     }
   };
   const nameHandler = (e) => {
     setName(e.target.value);
-    const re = /^[а-яА-ЯёЁa-zA-Z -]{3,40}$/;
-    if (
-      !re.test(String(e.target.value)) ||
-      e.target.value.trim().length < 2 ||
-      e.target.value.trim().length > 40
-    ) {
+    if (e.target.value.trim().length < 2 || e.target.value.trim().length > 40) {
       setNameDirty(true);
     } else {
       setNameDirty(false);
@@ -132,7 +136,7 @@ export const OrderForm = ({ addOrderForm }) => {
         {addOrderForm ? (
           <>
             <Input
-              className={emailDirty ? "false" : "true"}
+              className={isCheckForm ? (emailDirty ? "false" : "true") : " "}
               addOrderForm={addOrderForm}
               addOrder={addOrder}
               name="email"
@@ -142,7 +146,7 @@ export const OrderForm = ({ addOrderForm }) => {
               placeholder="Ваш E-mail"
             />
             <Input
-              className={numberDirty ? "false" : "true"}
+              className={isCheckForm ? (numberDirty ? "false" : "true") : " "}
               addOrderForm={addOrderForm}
               name="number"
               type="text"
@@ -151,7 +155,7 @@ export const OrderForm = ({ addOrderForm }) => {
               placeholder="+375(99)999-99-99"
             />
             <Input
-              className={nameDirty ? "false" : "true"}
+              className={isCheckForm ? (nameDirty ? "false" : "true") : ""}
               addOrderForm={addOrderForm}
               name="name"
               type="text"
@@ -163,7 +167,7 @@ export const OrderForm = ({ addOrderForm }) => {
         ) : (
           <>
             <Input
-              className={emailDirty ? "false" : "true"}
+              className={isCheckForm ? (emailDirty ? "false" : "true") : ""}
               addOrder={addOrder}
               name="email"
               type="email"
@@ -172,7 +176,7 @@ export const OrderForm = ({ addOrderForm }) => {
               placeholder="Ваш E-mail"
             />
             <Input
-              className={numberDirty ? "false" : "true"}
+              className={isCheckForm ? (numberDirty ? "false" : "true") : ""}
               name="number"
               type="text"
               value={number}
@@ -180,7 +184,7 @@ export const OrderForm = ({ addOrderForm }) => {
               placeholder="+375(99)999-99-99"
             />
             <Input
-              className={nameDirty ? "false" : "true"}
+              className={isCheckForm ? (nameDirty ? "false" : "true") : ""}
               name="name"
               type="text"
               value={name}
