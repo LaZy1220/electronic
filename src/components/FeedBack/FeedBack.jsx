@@ -115,8 +115,17 @@ export const FeedBack = ({ width }) => {
     setIsResizeBlock(false);
     decIndexRewiev();
   };
+  const resizeSlide = (currentSlide) => {
+    if (width > 1130) {
+      setOffset(-currentSlide * 900);
+    } else if (width < 1130 && width > 730) {
+      setOffset(-currentSlide * 700);
+    } else {
+      setOffset(-currentSlide * 300);
+    }
+  };
   useEffect(() => {
-    setOffset(0);
+    resizeSlide(currentIndexRewiev);
   }, [width]);
   return (
     <>
