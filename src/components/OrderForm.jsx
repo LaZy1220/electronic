@@ -86,7 +86,12 @@ export const OrderForm = ({ addOrderForm }) => {
   };
   const nameHandler = (e) => {
     setName(e.target.value);
-    if (e.target.value.trim().length < 2 || e.target.value.trim().length > 40) {
+    const re = /^[а-яА-ЯёЁa-zA-Z -]{3,40}$/;
+    if (
+      !re.test(String(e.target.value)) ||
+      e.target.value.trim().length < 2 ||
+      e.target.value.trim().length > 40
+    ) {
       setNameDirty(true);
     } else {
       setNameDirty(false);
@@ -94,8 +99,7 @@ export const OrderForm = ({ addOrderForm }) => {
   };
   const emailHandler = (e) => {
     setEmail(e.target.value);
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^[a-zA-Z0-9 -]+@([a-zA-Z -]+\.)+[a-zA-Z]{2,4}$/;
     if (!re.test(String(e.target.value).toLowerCase())) {
       setEmailDirty(true);
     } else {
@@ -104,7 +108,8 @@ export const OrderForm = ({ addOrderForm }) => {
   };
   const numberHandler = (e) => {
     setNumber(e.target.value);
-    const re = /^(\+375|80)(29|25|44|33)(\d{3})(\d{2})(\d{2})$/;
+    const re =
+      /^(\+375|80|375)(\(33\)|\(44\)|\(25\)|\(29\)|29|25|44|33)([0-9-]{3,4})([0-9-]{2,3})([0-9-]{2,3})$/;
     if (!re.test(String(e.target.value))) {
       setNumberDirty(true);
     } else {

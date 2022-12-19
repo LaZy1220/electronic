@@ -42,13 +42,35 @@ code {
   border: 3px solid red;
   background-color: #fff1f1 !important;
 }
+@keyframes show {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+@keyframes hide {
+  0% {
+    visibility: visible;
+    opacity: 1;
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
 .hide-navigate {
-  opacity: 0;
-  transition: 0.15s ease-in;
+  animation-duration: 0.5s;
+  animation-name: hide;
+  animation-fill-mode: forwards;
 }
 .show-navigate {
-  opacity: 1;
-  transition: 0.15s ease-in;
+  animation-duration: 0.5s;
+  animation-name: show;
+  animation-fill-mode: forwards;
 }
 .active-block {
   color: white !important;

@@ -82,11 +82,11 @@ export const FeedBack = ({ width }) => {
   };
   const nextFeedBack = () => {
     setOffset((currentOffset) => {
-      if (width > 1130) {
+      if (width > 1120) {
         const newOffset = currentOffset - 900;
         const maxOffset = -(900 * (feedBack.length - 1));
         return Math.max(newOffset, maxOffset);
-      } else if (width < 1130 && width > 730) {
+      } else if (width < 1120 && width > 730) {
         const newOffset = currentOffset - 700;
         const maxOffset = -(700 * (feedBack.length - 1));
         return Math.max(newOffset, maxOffset);
@@ -101,10 +101,10 @@ export const FeedBack = ({ width }) => {
   };
   const prevFeedBack = () => {
     setOffset((currentOffset) => {
-      if (width > 1130) {
+      if (width >= 1120) {
         const newOffset = currentOffset + 900;
         return Math.min(newOffset, 0);
-      } else if (width < 1130 && width > 730) {
+      } else if (width < 1120 && width > 730) {
         const newOffset = currentOffset + 700;
         return Math.min(newOffset, 0);
       } else {
@@ -116,9 +116,9 @@ export const FeedBack = ({ width }) => {
     decIndexRewiev();
   };
   const resizeSlide = (currentSlide) => {
-    if (width > 1130) {
+    if (width >= 1120) {
       setOffset(-currentSlide * 900);
-    } else if (width < 1130 && width > 730) {
+    } else if (width < 1120 && width > 730) {
       setOffset(-currentSlide * 700);
     } else {
       setOffset(-currentSlide * 300);

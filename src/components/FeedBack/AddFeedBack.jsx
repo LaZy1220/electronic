@@ -6,6 +6,7 @@ import { setActiveAddFeedBack } from "../features/addFeedBack-slice";
 import axios from "axios";
 import { useEffect } from "react";
 import { setActiveThankForReview } from "../features/thankForReview-slice";
+import { findAllInRenderedTree } from "react-dom/test-utils";
 
 const Wrapper = styled.div`
   position: fixed;
@@ -98,7 +99,12 @@ export const AddFeedBack = () => {
   const dispatch = useDispatch();
   const nameHandler = (e) => {
     setName(e.target.value);
-    if (e.target.value.trim().length < 2 || e.target.value.trim().length > 40) {
+    const re = /^[а-яА-ЯёЁa-zA-Z -]{3,40}$/;
+    if (
+      !re.test(String(e.target.value)) ||
+      e.target.value.trim().length < 2 ||
+      e.target.value.trim().length > 40
+    ) {
       setNameDirty(true);
     } else {
       setNameDirty(false);
@@ -123,25 +129,31 @@ export const AddFeedBack = () => {
     }
   };
   const fetchFunc = async () => {
-    debugger;
-    let response;
-    if (selectedFile) {
-      const formData = new FormData();
-      formData.append("image", selectedFile);
-      formData.append("name_surname", name);
-      formData.append("review", review);
-      response = formData;
-    } else {
-      response = {
-        image: selectedFile,
-        name_surname: name,
-        review: review,
-      };
+    try {
+      let dataToSend;
+      if (selectedFile) {
+        const formData = new FormData();
+        formData.append("image", selectedFile);
+        formData.append("name_surname", name);
+        formData.append("review", review);
+        dataToSend = formData;
+      } else {
+        dataToSend = {
+          image: selectedFile,
+          name_surname: name,
+          review: review,
+        };
+      }
+      const response = await axios.post(
+        "http://electrical.makser-test.site/api/review-post/",
+        dataToSend
+      );
+      if (response.data.error) {
+        alert(response.data.error);
+      }
+    } catch (e) {
+      alert(e);
     }
-    return await axios.post(
-      "http://electrical.makser-test.site/api/review-post/",
-      response
-    );
   };
   useEffect(() => {
     if (reviewDirty || nameDirty) {

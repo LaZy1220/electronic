@@ -4,7 +4,7 @@ import { Title } from "../Title";
 import { Stage } from "./Stage";
 
 const StageWorkEl = styled.div`
-  padding-top: 110px;
+  margin-top: 110px;
   padding-bottom: 150px;
 `;
 const Grid = styled.div`
