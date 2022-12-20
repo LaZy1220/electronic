@@ -8,12 +8,14 @@ import { setActiveOrder } from "./features/isShowOrder-slice";
 const Input = styled.input`
   width: ${(props) => (props.addOrderForm ? "100%" : "40%")};
   height: 60px;
-  padding-left: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
   font-size: 20px;
   @media screen and (max-width: 700px) {
     width: ${(props) => (props.addOrderForm ? "80%" : "60%")};
     height: 50px;
-    padding-left: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     font-size: 18px;
   }
 `;

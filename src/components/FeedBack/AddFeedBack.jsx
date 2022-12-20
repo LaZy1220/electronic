@@ -6,6 +6,7 @@ import { setActiveAddFeedBack } from "../features/addFeedBack-slice";
 import axios from "axios";
 import { useEffect } from "react";
 import { setActiveThankForReview } from "../features/thankForReview-slice";
+import { setCheckForm } from "../features/isCheckForm-slice";
 
 const Wrapper = styled.div`
   position: fixed;
@@ -21,6 +22,7 @@ const Wrapper = styled.div`
 const Input = styled.input`
   font-size: 16px;
   padding-left: 15px;
+  padding-right: 15px;
   height: 40px;
   width: 400px;
   @media screen and (max-width: 470px) {
@@ -95,6 +97,7 @@ export const AddFeedBack = () => {
   const [formValid, setFormValid] = useState(false);
   const isAddFeedBack = useSelector((state) => state.isAddFeedBack);
   const isActiveThankForReview = useSelector((state) => state.isThankForReview);
+  const isCheckForm = useSelector((state) => state.isCheckForm);
   const dispatch = useDispatch();
   const nameHandler = (e) => {
     setName(e.target.value);
@@ -121,10 +124,17 @@ export const AddFeedBack = () => {
     }
   };
   const addReview = () => {
+    dispatch(setCheckForm(!isCheckForm));
     if (formValid) {
       fetchFunc();
       dispatch(setActiveAddFeedBack(!isAddFeedBack));
     }
+  };
+  const closeModal = () => {
+    if (isCheckForm) {
+      dispatch(setCheckForm(!isCheckForm));
+    }
+    dispatch(setActiveAddFeedBack(!isAddFeedBack));
   };
   const fetchFunc = async () => {
     let dataToSend;
@@ -166,13 +176,9 @@ export const AddFeedBack = () => {
     <Wrapper>
       <AddFeedBackEl>
         <h2>Оставить отзыв</h2>
-        <img
-          onClick={() => dispatch(setActiveAddFeedBack(!isAddFeedBack))}
-          src={Cross}
-          alt="X"
-        />
+        <img onClick={() => closeModal()} src={Cross} alt="X" />
         <Input
-          className={nameDirty ? "false" : "true"}
+          className={isCheckForm ? (nameDirty ? "false" : "true") : " "}
           type="text"
           name="name"
           onChange={(e) => nameHandler(e)}
@@ -188,7 +194,7 @@ export const AddFeedBack = () => {
         </AddFile>
         <Review
           placeholder="Отзыв"
-          className={reviewDirty ? "false" : "true"}
+          className={isCheckForm ? (reviewDirty ? "false" : "true") : " "}
           onChange={(e) => reviewHandler(e)}
         />
         <Button onClick={() => addReview()}>Отправить</Button>
