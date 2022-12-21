@@ -45,6 +45,7 @@ export const Navigate = ({ width }) => {
     } else {
       setColor(false);
     }
+    prevScrollpos = currentScrollPos;
   };
   window.addEventListener("scroll", changeColor);
   return (
