@@ -154,7 +154,7 @@ export const AddFeedBack = () => {
     try {
       const response = await axios.post(
         "http://electrical.makser-test.site/api/review-post/",
-        dataToSend
+        JSON.stringify(dataToSend)
       );
       console.log(response);
       if (response.data.error) {
