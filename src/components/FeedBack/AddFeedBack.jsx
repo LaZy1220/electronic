@@ -63,6 +63,11 @@ const AddFeedBackEl = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
   img {
     cursor: pointer;
     position: absolute;
@@ -123,7 +128,8 @@ export const AddFeedBack = () => {
       setReviewDirty(false);
     }
   };
-  const addReview = () => {
+  const addReview = (e) => {
+    e.preventDefault();
     dispatch(setCheckForm(!isCheckForm));
     if (formValid) {
       fetchFunc();
@@ -139,11 +145,9 @@ export const AddFeedBack = () => {
   const fetchFunc = async () => {
     let dataToSend;
     if (selectedFile) {
-      const formData = new FormData();
-      formData.append("image", selectedFile);
-      formData.append("name_surname", name);
-      formData.append("review", review);
+      const formData = new FormData(document.getElementById("form"));
       dataToSend = formData;
+      console.log(...dataToSend);
     } else {
       dataToSend = {
         image: selectedFile,
@@ -153,8 +157,8 @@ export const AddFeedBack = () => {
     }
     try {
       const response = await axios.post(
-        "http://electrical.makser-test.site/api/review-post/",
-        JSON.stringify(dataToSend)
+        "https://electric.makser-test.site/api/review-post/",
+        dataToSend
       );
       console.log(response);
       if (response.data.error) {
@@ -177,27 +181,31 @@ export const AddFeedBack = () => {
       <AddFeedBackEl>
         <h2>Оставить отзыв</h2>
         <img onClick={() => closeModal()} src={Cross} alt="X" />
-        <Input
-          className={isCheckForm ? (nameDirty ? "false" : "true") : " "}
-          type="text"
-          name="name"
-          onChange={(e) => nameHandler(e)}
-          placeholder="Ваше имя"
-        />
-        <AddFile>
-          <label>Файл</label>
-          <input
-            type="file"
-            onChange={(e) => setSelectedFile(e.target.files[0])}
-            accept="image/*,.png,.jpg,.gif,.web,jpeg,"
+        <form id="form" onSubmit={(e) => addReview(e)}>
+          <Input
+            className={isCheckForm ? (nameDirty ? "false" : "true") : " "}
+            type="text"
+            name=" name_surname"
+            onChange={(e) => nameHandler(e)}
+            placeholder="Ваше имя"
           />
-        </AddFile>
-        <Review
-          placeholder="Отзыв"
-          className={isCheckForm ? (reviewDirty ? "false" : "true") : " "}
-          onChange={(e) => reviewHandler(e)}
-        />
-        <Button onClick={() => addReview()}>Отправить</Button>
+          <AddFile>
+            <label>Файл</label>
+            <input
+              type="file"
+              name="image"
+              onChange={(e) => setSelectedFile(e.target.files[0])}
+              accept="image/*,.png,.jpg,.gif,.web,jpeg,"
+            />
+          </AddFile>
+          <Review
+            placeholder="Отзыв"
+            name="review"
+            className={isCheckForm ? (reviewDirty ? "false" : "true") : " "}
+            onChange={(e) => reviewHandler(e)}
+          />
+          <Button type="submit">Отправить</Button>
+        </form>
       </AddFeedBackEl>
     </Wrapper>
   );

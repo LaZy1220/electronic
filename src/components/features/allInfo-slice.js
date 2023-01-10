@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getInfoPage = createAsyncThunk("@@allInfo/load-info", async () => {
-  return axios.get("http://electrical.makser-test.site/api/all/");
+  return axios.get("https://electric.makser-test.site/api/all/");
 });
 const initialState = {
   status: "idle",
