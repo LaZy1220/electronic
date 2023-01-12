@@ -7,7 +7,6 @@ import axios from "axios";
 import { useEffect } from "react";
 import { setActiveThankForReview } from "../features/thankForReview-slice";
 import { setCheckForm } from "../features/isCheckForm-slice";
-
 const Wrapper = styled.div`
   position: fixed;
   left: 0;
@@ -54,7 +53,6 @@ const Button = styled.button`
     border: 3px solid var(--yellow);
   }
 `;
-
 const AddFeedBackEl = styled.div`
   position: relative;
   padding: 25px;
@@ -63,11 +61,6 @@ const AddFeedBackEl = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
   img {
     cursor: pointer;
     position: absolute;
@@ -92,7 +85,6 @@ const AddFile = styled.div`
     font-size: 14px;
   }
 `;
-
 export const AddFeedBack = () => {
   const [name, setName] = useState("");
   const [review, setReview] = useState("");
@@ -128,8 +120,7 @@ export const AddFeedBack = () => {
       setReviewDirty(false);
     }
   };
-  const addReview = (e) => {
-    e.preventDefault();
+  const addReview = () => {
     dispatch(setCheckForm(!isCheckForm));
     if (formValid) {
       fetchFunc();
@@ -145,15 +136,18 @@ export const AddFeedBack = () => {
   const fetchFunc = async () => {
     let dataToSend;
     if (selectedFile) {
-      const formData = new FormData(document.getElementById("form"));
+      const formData = new FormData();
+      formData.append("image", selectedFile);
+      formData.append("name_surname", name);
+      formData.append("review", review);
       dataToSend = formData;
-      console.log(...dataToSend);
     } else {
       dataToSend = {
         image: selectedFile,
         name_surname: name,
         review: review,
       };
+      console.log(dataToSend);
     }
     try {
       const response = await axios.post(
@@ -181,31 +175,27 @@ export const AddFeedBack = () => {
       <AddFeedBackEl>
         <h2>Оставить отзыв</h2>
         <img onClick={() => closeModal()} src={Cross} alt="X" />
-        <form id="form" onSubmit={(e) => addReview(e)}>
-          <Input
-            className={isCheckForm ? (nameDirty ? "false" : "true") : " "}
-            type="text"
-            name=" name_surname"
-            onChange={(e) => nameHandler(e)}
-            placeholder="Ваше имя"
+        <Input
+          className={isCheckForm ? (nameDirty ? "false" : "true") : " "}
+          type="text"
+          name="name"
+          onChange={(e) => nameHandler(e)}
+          placeholder="Ваше имя"
+        />
+        <AddFile>
+          <label>Файл</label>
+          <input
+            type="file"
+            onChange={(e) => setSelectedFile(e.target.files[0])}
+            accept="image/*,.png,.jpg,.gif,.web,jpeg,"
           />
-          <AddFile>
-            <label>Файл</label>
-            <input
-              type="file"
-              name="image"
-              onChange={(e) => setSelectedFile(e.target.files[0])}
-              accept="image/*,.png,.jpg,.gif,.web,jpeg,"
-            />
-          </AddFile>
-          <Review
-            placeholder="Отзыв"
-            name="review"
-            className={isCheckForm ? (reviewDirty ? "false" : "true") : " "}
-            onChange={(e) => reviewHandler(e)}
-          />
-          <Button type="submit">Отправить</Button>
-        </form>
+        </AddFile>
+        <Review
+          placeholder="Отзыв"
+          className={isCheckForm ? (reviewDirty ? "false" : "true") : " "}
+          onChange={(e) => reviewHandler(e)}
+        />
+        <Button onClick={() => addReview()}>Отправить</Button>
       </AddFeedBackEl>
     </Wrapper>
   );
