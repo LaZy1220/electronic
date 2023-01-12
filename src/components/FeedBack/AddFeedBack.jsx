@@ -134,25 +134,19 @@ export const AddFeedBack = () => {
     dispatch(setActiveAddFeedBack(!isAddFeedBack));
   };
   const fetchFunc = async () => {
-    let dataToSend;
+    const formData = new FormData();
+    formData.append("name_surname", name);
+    formData.append("review", review);
     if (selectedFile) {
-      const formData = new FormData();
       formData.append("image", selectedFile);
-      formData.append("name_surname", name);
-      formData.append("review", review);
-      dataToSend = formData;
     } else {
-      dataToSend = {
-        image: selectedFile,
-        name_surname: name,
-        review: review,
-      };
-      console.log(dataToSend);
+      formData.append("image", null);
     }
+    console.log(...formData);
     try {
       const response = await axios.post(
         "https://electric.makser-test.site/api/review-post/",
-        dataToSend
+        formData
       );
       console.log(response);
       if (response.data.error) {
